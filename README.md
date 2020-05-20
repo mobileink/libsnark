@@ -1,3 +1,5 @@
+FORK: for bazelization
+
 libsnark: a C++ library for zkSNARK proofs
 ================================================================================
 
