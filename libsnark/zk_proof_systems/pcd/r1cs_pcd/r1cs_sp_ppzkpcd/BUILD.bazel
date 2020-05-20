@@ -1,0 +1,44 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+cc_library(
+    name = "r1cs_sp_ppzkpcd",
+    visibility = ["//visibility:public"],
+    hdrs = [
+        "r1cs_sp_ppzkpcd.hpp", "r1cs_sp_ppzkpcd.tcc",
+        "sp_pcd_circuits.hpp", "sp_pcd_circuits.tcc",
+        "r1cs_sp_ppzkpcd_params.hpp",
+    ],
+    copts = ["-I."],
+    deps = [
+        "//libsnark/gadgetlib1/gadgets/verifiers",
+        "//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark",
+        "//libsnark/zk_proof_systems/pcd/r1cs_pcd/compliance_predicate",
+        "//libsnark/zk_proof_systems/pcd/r1cs_pcd",
+        "//libsnark/gadgetlib1/gadgets/hashes:crh_gadget",
+        "//libsnark/gadgetlib1/gadgets/pairing",
+        "@libff//libff"
+    ]
+)
+
+cc_library(
+    name = "examples",
+    visibility = ["//visibility:public"],
+    hdrs = ["examples/run_r1cs_sp_ppzkpcd.hpp",
+            "examples/run_r1cs_sp_ppzkpcd.tcc"],
+    copts = ["-I."],
+    deps = [
+        "//libsnark/zk_proof_systems/pcd/r1cs_pcd/compliance_predicate:examples",
+        "//libsnark/zk_proof_systems/pcd/r1cs_pcd/r1cs_sp_ppzkpcd"
+    ]
+)
+
+cc_binary(
+    name = "tests",
+    visibility = ["//visibility:public"],
+    srcs = ["tests/test_r1cs_sp_ppzkpcd.cpp"],
+    copts = ["-I."],
+    deps = [
+        "//libsnark/common/default_types",
+        "//libsnark/zk_proof_systems/pcd/r1cs_pcd/r1cs_sp_ppzkpcd:examples"
+    ]
+)

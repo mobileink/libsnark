@@ -1,0 +1,34 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+cc_library(
+    name = "knapsack",
+    visibility = ["//visibility:public"],
+    hdrs = ["knapsack_gadget.hpp", "knapsack_gadget.tcc"],
+    deps = [
+        "//libsnark/common/data_structures",
+        "//libsnark/gadgetlib1/gadgets",
+        # "//libsnark/gadgetlib1/gadgets/hashes:crh_gadget"
+    ]
+)
+
+cc_binary(
+    name = "tests",
+    visibility = ["//visibility:public"],
+    srcs = ["tests/test_knapsack_gadget.cpp"],
+    copts = ["-I."],
+    deps = [
+        #ifdef CURVE_BN128
+        # include <libff/algebra/curves/bn128/bn128_pp.hpp>
+        #endif
+        ":knapsack",
+        "@libff//libff"
+    ]
+)
+
+py_binary(
+    name = "testpy",
+    main = "generate_knapsack_tests.py",
+    python_version = "PY2",
+    srcs = ["tests/generate_knapsack_tests.py"]
+)
+

@@ -1,0 +1,20 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+cc_library(
+    name = "gadgets",
+    visibility = ["//visibility:public"],
+    hdrs = glob(["*.hpp"]) + glob(["*.tcc"]),
+    copts = ["-I."],
+    deps = ["//libsnark/gadgetlib1",
+            "//libsnark/gadgetlib1/gadgets/curves:weierstrass"]
+)
+
+cc_library(
+    name = "delegated_ra_memory",
+    visibility = ["//visibility:public"],
+    hdrs = ["delegated_ra_memory/memory_load_gadget.hpp",
+            "delegated_ra_memory/memory_load_store_gadget.hpp"],
+    copts = ["-I."],
+    deps = ["//libsnark/gadgetlib1/gadgets/merkle_tree"]
+)
+

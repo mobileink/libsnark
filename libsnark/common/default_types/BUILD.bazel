@@ -1,0 +1,33 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "default_types",
+    visibility = ["//visibility:public"],
+    srcs = [
+        "bacs_ppzksnark_pp.hpp",
+        "r1cs_gg_ppzksnark_pp.hpp",
+        "r1cs_ppzkpcd_pp.cpp",
+        "r1cs_ppzkpcd_pp.hpp",
+        "r1cs_ppzksnark_pp.hpp",
+        "r1cs_se_ppzksnark_pp.hpp",
+        "ram_ppzksnark_pp.hpp",
+        "ram_zksnark_pp.hpp",
+        "tbcs_ppzksnark_pp.hpp",
+        "tinyram_ppzksnark_pp.cpp",
+        "tinyram_ppzksnark_pp.hpp",
+        "tinyram_zksnark_pp.cpp",
+        "tinyram_zksnark_pp.hpp",
+        "uscs_ppzksnark_pp.hpp"
+    ]
+    + select({
+        "//bzl/host:linux": ["XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"],
+        "//conditions:default": ["r1cs_ppzkadsnark_pp.cpp",
+                             "r1cs_ppzkadsnark_pp.hpp"],
+    }),
+    hdrs = glob([".hpp"]),
+    copts = ["-I.", "-Iexternal"],
+    deps = ["//libsnark/zk_proof_systems/ppzkadsnark/r1cs_ppzkadsnark/examples/prf",
+            "//libsnark/relations/ram_computations/rams/tinyram",
+            "//libsnark/common",
+            "@libff//libff"]
+)

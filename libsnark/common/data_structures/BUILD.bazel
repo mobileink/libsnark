@@ -1,0 +1,15 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "data_structures",
+    visibility = ["//visibility:public"],
+    srcs = glob(["*.cpp", "*.hpp"]),
+    hdrs = glob([".hpp", "*.tcc"]),
+    copts = ["-I."],
+    deps = [
+        "//libsnark/common",
+        "//libsnark/gadgetlib1/gadgets/hashes",
+        "@libff//libff"
+    ]
+)
+

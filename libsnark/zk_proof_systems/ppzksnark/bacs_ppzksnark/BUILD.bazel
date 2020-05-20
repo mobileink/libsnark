@@ -1,0 +1,50 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+cc_library(
+    name = "bacs_ppzksnark",
+    visibility = ["//visibility:public"],
+    hdrs = ["bacs_ppzksnark.hpp",
+            "bacs_ppzksnark.tcc",
+            "bacs_ppzksnark_params.hpp"],
+    deps = [
+        "//libsnark/relations/circuit_satisfaction_problems/bacs",
+        "//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark",
+        "//libsnark/reductions/bacs_to_r1cs"
+    ]
+)
+
+cc_library(
+    name = "examples",
+    visibility = ["//visibility:public"],
+    hdrs = ["examples/run_bacs_ppzksnark.hpp",
+            "examples/run_bacs_ppzksnark.tcc"],
+    deps = [":bacs_ppzksnark",
+            "//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark"]
+)
+
+cc_binary(
+    name = "profiling",
+    visibility = ["//visibility:public"],
+    srcs = ["profiling/profile_bacs_ppzksnark.cpp"],
+    copts = ["-I."],
+    deps = [
+        "//libsnark/common/default_types",
+        "//libsnark/relations/circuit_satisfaction_problems/bacs:examples",
+        "//libsnark/zk_proof_systems/ppzksnark/bacs_ppzksnark:examples",
+        "@libff//libff",
+    ]
+)
+
+cc_binary(
+    name = "tests",
+    visibility = ["//visibility:public"],
+    srcs = ["tests/test_bacs_ppzksnark.cpp"],
+    copts = ["-I."],
+    deps = [
+        "@libff//libff",
+        "//libsnark/common/default_types",
+        "//libsnark/relations/circuit_satisfaction_problems/bacs:examples",
+        "//libsnark/zk_proof_systems/ppzksnark/bacs_ppzksnark:examples"
+    ]
+)
+

@@ -1,0 +1,35 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+cc_library(
+    name = "merkle_tree",
+    visibility = ["//visibility:public"],
+    hdrs = ["merkle_authentication_path_variable.hpp",
+            "merkle_authentication_path_variable.tcc",
+            "merkle_tree_check_read_gadget.hpp",
+            "merkle_tree_check_read_gadget.tcc",
+            "merkle_tree_check_update_gadget.hpp",
+            "merkle_tree_check_update_gadget.tcc"
+    ],
+    deps = [
+            "//libsnark/common/data_structures",
+            "//libsnark/gadgetlib1",
+            "//libsnark/gadgetlib1/gadgets/hashes:crh_gadget"
+    ]
+)
+
+cc_binary(
+    name = "test",
+    visibility = ["//visibility:public"],
+    srcs = ["tests/test_merkle_tree_gadgets.cpp"],
+    copts = ["-I."],
+    deps = [
+        ":merkle_tree",
+        "//libsnark/gadgetlib1/gadgets/hashes:crh_gadget",
+        "//libsnark/gadgetlib1/gadgets/hashes/sha256",
+# ifdef CURVE_BN128
+# include <libff/algebra/curves/bn128/bn128_pp.hpp>
+# endif
+        "@libff//libff"
+    ]
+)
+

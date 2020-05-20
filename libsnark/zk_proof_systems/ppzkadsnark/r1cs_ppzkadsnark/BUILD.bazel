@@ -1,0 +1,9 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "r1cs_ppzkadsnark",
+    visibility = ["//visibility:public"],
+    hdrs = glob(["*.hpp", "*.tcc"]),
+    deps = ["//libsnark/zk_proof_systems/ppzkadsnark/r1cs_ppzkadsnark/examples/signature"]
+)
+

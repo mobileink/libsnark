@@ -1,0 +1,51 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+cc_library(
+    name = "r1cs_mp_ppzkpcd",
+    visibility = ["//visibility:public"],
+    hdrs = [
+        "mp_pcd_circuits.hpp", "mp_pcd_circuits.tcc",
+        "r1cs_mp_ppzkpcd.hpp", "r1cs_mp_ppzkpcd.tcc",
+        "r1cs_mp_ppzkpcd_params.hpp"
+    ],
+    copts = ["-I."],
+    deps = [
+        "//libsnark/common/data_structures",
+        "//libsnark/gadgetlib1",
+        "//libsnark/gadgetlib1/gadgets",
+        "//libsnark/gadgetlib1/gadgets/hashes:crh_gadget",
+        "//libsnark/gadgetlib1/gadgets/set_commitment",
+        "//libsnark/gadgetlib1/gadgets/verifiers",
+        "//libsnark/zk_proof_systems/pcd/r1cs_pcd",
+        "//libsnark/zk_proof_systems/pcd/r1cs_pcd/compliance_predicate",
+        "//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark"
+    ]
+)
+
+cc_library(
+    name = "examples",
+    visibility = ["//visibility:public"],
+    hdrs = ["examples/run_r1cs_mp_ppzkpcd.hpp",
+            "examples/run_r1cs_mp_ppzkpcd.tcc"],
+    copts = ["-I."],
+    deps = [
+        "//libsnark/zk_proof_systems/pcd/r1cs_pcd/compliance_predicate:examples",
+        "//libsnark/zk_proof_systems/pcd/r1cs_pcd/r1cs_mp_ppzkpcd"
+    ]
+)
+
+cc_binary(
+    name = "tests",
+    visibility = ["//visibility:public"],
+    srcs = ["tests/test_r1cs_mp_ppzkpcd.cpp"],
+    copts = ["-I."],
+    deps = [
+        "//libsnark/common/default_types",
+        "//libsnark/zk_proof_systems/pcd/r1cs_pcd/r1cs_mp_ppzkpcd:examples"
+    ]
+)
+
+
+
+
+

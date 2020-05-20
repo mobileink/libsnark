@@ -1,0 +1,18 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "examples",
+    visibility = ["//visibility:public"],
+    srcs = ["demo_r1cs_ppzkadsnark.cpp"],
+    hdrs = ["run_r1cs_ppzkadsnark.hpp",
+            "run_r1cs_ppzkadsnark.tcc"],
+    copts = select({
+        "//bzl/host:macos": ["'ERROR: this target only valid with flag --with-supercop'"],
+        "//conditions:default": ["-I."]
+    }),
+    deps = ["//libsnark/common/default_types",
+            "//libsnark/relations/constraint_satisfaction_problems/r1cs:examples",
+            "//libsnark/zk_proof_systems/ppzkadsnark/r1cs_ppzkadsnark",
+            "@libff//libff"]
+)
+

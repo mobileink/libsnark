@@ -1,0 +1,9 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "prf",
+    visibility = ["//visibility:public"],
+    hdrs = ["aes_ctr_prf.hpp", "aes_ctr_prf.tcc"],
+    deps = ["//libsnark/zk_proof_systems/ppzkadsnark/r1cs_ppzkadsnark"]
+)
+

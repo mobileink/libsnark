@@ -1,0 +1,138 @@
+load("@bazel_skylib//rules:common_settings.bzl",
+     "bool_flag", "string_flag")
+# load("@rules_foreign_cc//tools/build_defs:cmake.bzl", "cmake_external")
+# load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+################################################################
+## command-line parameters
+## e.g. --//libfqfft:curve="edwards" --//libfqfft:multicore
+
+string_flag( name = "curve",
+             values = ["bn128", "alt_bn128", "edwards", "mnt4", "mnt6", ""],
+             build_setting_default = "mnt4")
+config_setting( name = "curve_bn128",
+                flag_values = { ":curve": "bn128" })
+# set -DCURVE_${CURVE}
+# if(${CURVE} STREQUAL "BN128")
+#     -DBN_SUPPORT_SNARK=1
+
+bool_flag( name = "multicore",
+           build_setting_default = False)
+# -DMULTICORE=1
+config_setting( name = "_multicore",
+                flag_values = { ":multicore": "true" })
+
+# Other flags:
+#   DEBUG
+# "Enable debugging mode"
+bool_flag( name = "debug",
+           build_setting_default = False)
+# -DDEBUG=1
+config_setting( name = "_debug",
+                flag_values = { ":debug": "true" })
+
+# "Limit the size of multi-exponentiation tables, for low-memory platforms"
+bool_flag( name = "lowmem",
+           build_setting_default = False)
+# -DLOWMEM=1
+config_setting( name = "_lowmem",
+                flag_values = { ":lowmem": "true" })
+
+# In serialization, output raw binary data (instead of decimal),
+# which is smaller and faster.
+bool_flag( name = "binary-output",
+           build_setting_default = True)
+# -DBINARY_OUTPUT
+config_setting( name = "_binary-output",
+                flag_values = { ":binary-output": "true" })
+
+# Serialize Fp elements as their Montgomery representations (faster
+# but not human-readable)
+bool_flag( name = "montgomery-output",
+           build_setting_default = True)
+# -DMONTGOMERY_OUTPUT
+config_setting( name = "_montgomery-output",
+                flag_values = { ":montgomery-output": "true" })
+
+bool_flag( name = "use-pt-compression",
+           build_setting_default = True)
+config_setting( name = "_use-pt-compression",
+                flag_values = { ":use-pt-compression": "true" })
+# if false: -DNO_PT_COMPRESSION=1
+
+# Collect counts for field and curve operations
+bool_flag( name = "profile-op-counts",
+           build_setting_default = False)
+config_setting( name = "_profile-op-counts",
+                flag_values = { ":profile-op-counts": "true" })
+# -DPROFILE_OP_COUNTS=1
+
+# Convert each element of the key pair to affine coordinates
+bool_flag( name = "use-mixed-addition",
+           build_setting_default = False)
+config_setting( name = "_use-mixed-addition",
+                flag_values = { ":use-mixed-addition": "true" })
+# -DUSE_MIXED_ADDITION=1
+
+# Support for Ed25519 signatures required by ADSNARK
+bool_flag( name = "with-supercop",
+           build_setting_default = True)
+config_setting( name = "_with-supercop",
+                flag_values = { ":with-supercop": "true" })
+
+# Use procps for memory profiling
+bool_flag( name = "with-procps",
+           build_setting_default = False)
+# default:    -DNO_PROCPS
+config_setting( name = "_with-procps",
+                flag_values = { ":with-procps": "true" })
+
+# Enable debugging of C++ STL (does not imply DEBUG)
+bool_flag( name = "cpp-debug",
+           build_setting_default = False)
+config_setting( name = "_cpp-debug",
+                flag_values = { ":cpp-debug": "true" })
+# -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC
+
+# Enable link-time and aggressive optimizations
+bool_flag( name = "performance",
+           build_setting_default = False)
+config_setting( name = "_performance",
+                flag_values = { ":performance": "true" })
+# -DNDEBUG
+#     "${CMAKE_CXX_FLAGS} -flto -fuse-linker-plugin"
+    # "${CMAKE_EXE_LINKER_FLAGS} -flto"
+
+# Use architecture-specific optimized assembly code
+bool_flag( name = "use-asm",
+           build_setting_default = True)
+# -DUSE_ASM
+config_setting( name = "_use-asm",
+                flag_values = { ":use-asm": "true" })
+
+cc_library(
+    name = "libsnark",
+    visibility = ["//visibility:public"],
+    srcs = [
+
+    ],
+    hdrs = glob([".hpp"])
+    + glob(["*.tcc"])
+    + [
+    ],
+    linkstatic = True,
+    deps = [
+        "//libsnark/common/data_structures",
+        "//libsnark/common/default_types",
+        "//libsnark/common/routing_algorithms",
+        "//libsnark/gadgetlib1",
+        "//libsnark/gadgetlib2",
+        "//libsnark/relations/circuit_satisfaction_problems/tbcs",
+        "//libsnark/relations/ram_computations/memory",
+        "//libsnark/relations/ram_computations/rams/fooram",
+        "//libsnark/relations/ram_computations/rams/tinyram",
+        "@ate_pairing//:zm", # if curve = bn128
+        # "//procps//props",  # if curve = bn128
+    ]
+)
+

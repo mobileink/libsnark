@@ -1,0 +1,22 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+cc_library(
+    name = "tbcs",
+    visibility = ["//visibility:public"],
+    srcs = ["tbcs.cpp", "tbcs.hpp"],
+    hdrs = ["tbcs.hpp"],
+    copts = ["-I."],
+    deps = ["//libsnark/relations",
+            "@libff//libff"]
+)
+
+# NOTE: no 'main' in cpp file
+cc_library(
+    name = "examples",
+    visibility = ["//visibility:public"],
+    srcs = ["examples/tbcs_examples.cpp",
+            "examples/tbcs_examples.hpp"],
+    copts = ["-I."],
+    deps = [":tbcs", "@libff//libff"]
+)
+

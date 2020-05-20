@@ -1,0 +1,42 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "gadgetlib1",
+    visibility = ["//visibility:public"],
+    srcs = ["constraint_profiling.cpp",
+            "constraint_profiling.hpp"],
+    hdrs = ["gadget.hpp", "gadget.tcc",
+            "pb_variable.hpp", "pb_variable.tcc",
+            "protoboard.hpp", "protoboard.tcc",
+            "constraint_profiling.hpp"],
+    # include_prefix = "libsnark/gadgetlib1",
+    linkstatic = True,
+    copts = ["-I."],
+    deps = ["//libsnark/relations",
+            "//libsnark/relations/constraint_satisfaction_problems/r1cs",
+            "@libff//libff"
+    ]
+)
+
+cc_library(
+    name = "examples",
+    visibility = ["//visibility:public"],
+    hdrs = ["examples/simple_example.hpp",
+            "examples/simple_example.tcc"],
+    deps = [
+        "//libsnark/gadgetlib1/gadgets",
+        "//libsnark/relations/constraint_satisfaction_problems/r1cs:examples"
+    ]
+)
+
+cc_test(
+    name = "tests",
+    visibility = ["//visibility:public"],
+    srcs = ["tests/gadgetlib1_test.cpp"],
+    copts = ["-I."],
+    deps = [":examples",
+            "//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark:examples",
+            "@gtest//:gtest_main",
+    ]
+)
+

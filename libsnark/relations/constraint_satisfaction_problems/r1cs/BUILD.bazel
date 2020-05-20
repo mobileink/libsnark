@@ -1,0 +1,17 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+cc_library(
+    name = "r1cs",
+    visibility = ["//visibility:public"],
+    hdrs = ["r1cs.hpp", "r1cs.tcc"],
+    deps = ["//libsnark/relations"]
+)
+
+cc_library(
+    name = "examples",
+    visibility = ["//visibility:public"],
+    hdrs = ["examples/r1cs_examples.hpp",
+            "examples/r1cs_examples.tcc"],
+    copts = ["-I."],
+    deps = [":r1cs"]
+)

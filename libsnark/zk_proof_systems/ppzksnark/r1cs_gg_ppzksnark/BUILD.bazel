@@ -1,0 +1,46 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+cc_library(
+    name = "r1cs_gg_ppzksnark",
+    visibility = ["//visibility:public"],
+    hdrs = ["r1cs_gg_ppzksnark.hpp",
+            "r1cs_gg_ppzksnark.tcc",
+            "r1cs_gg_ppzksnark_params.hpp"],
+    # deps = [""]
+)
+
+cc_library(
+    name = "examples",
+    visibility = ["//visibility:public"],
+    hdrs = ["examples/run_r1cs_gg_ppzksnark.hpp",
+            "examples/run_r1cs_gg_ppzksnark.tcc"],
+    copts = ["-I."],
+    deps = [":r1cs_gg_ppzksnark",
+            "//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark"]
+)
+
+cc_binary(
+    name = "profiling",
+    visibility = ["//visibility:public"],
+    srcs = ["profiling/profile_r1cs_gg_ppzksnark.cpp"],
+    copts = ["-I."],
+    deps = [
+        "//libsnark/common/default_types",
+        "//libsnark/relations/constraint_satisfaction_problems/r1cs:examples",
+        ":examples",
+        "@libff//libff",
+    ]
+)
+
+cc_binary(
+    name = "tests",
+    visibility = ["//visibility:public"],
+    srcs = ["tests/test_r1cs_gg_ppzksnark.cpp"],
+    copts = ["-I."],
+    deps = [
+        "//libsnark/common/default_types",
+        "//libsnark/relations/constraint_satisfaction_problems/r1cs:examples",
+        ":examples",
+        ":r1cs_gg_ppzksnark"]
+)
+

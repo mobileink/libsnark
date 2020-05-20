@@ -1,0 +1,8 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+cc_library(
+    name = "signature",
+    visibility = ["//visibility:public"],
+    hdrs = ["ed25519_signature.hpp", "ed25519_signature.tcc"],
+)
+

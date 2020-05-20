@@ -1,0 +1,17 @@
+cc_library(
+    name = "common",
+    visibility = ["//visibility:public"],
+    hdrs = ["libsnark_serialization.hpp"]
+    # srcs = glob(["default_types/*.cpp"])
+    # + glob(["default_types/*.hpp"])
+    # + glob(["routing_algorithms/*.cpp"])
+    # + ["data_structures/set_commitment.cpp"],
+    # hdrs = glob(["data_structures/*.hpp"])
+    # + glob(["data_structures/*.tcc"])
+    # # + glob(["default_types/*.hpp"])
+    # + glob(["routing_algorithms/*.cpp"])
+    # + ["libsnark_serialization.hpp"],
+    # include_prefix = "libsnark",
+    # copts = ["-Idata_structures", "-Ilibsnark/common/default_types"]
+)
+

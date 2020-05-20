@@ -1,3 +1,5 @@
+user.bazelrc
+
 *.o
 *.a
 *.so

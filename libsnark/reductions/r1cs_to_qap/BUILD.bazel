@@ -1,0 +1,12 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "r1cs_to_qap",
+    visibility = ["//visibility:public"],
+    hdrs = ["r1cs_to_qap.hpp", "r1cs_to_qap.tcc"],
+    deps = [
+        "//libsnark/relations/arithmetic_programs/qap",
+        "//libsnark/relations/constraint_satisfaction_problems/r1cs"
+    ]
+)
+

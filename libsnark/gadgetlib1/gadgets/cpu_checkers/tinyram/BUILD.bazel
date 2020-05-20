@@ -1,0 +1,9 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+cc_library(
+    name = "tinyram",
+    visibility = ["//visibility:public"],
+    hdrs = ["tinyram_cpu_checker.hpp", "tinyram_cpu_checker.tcc"],
+    deps = ["//libsnark/gadgetlib1/gadgets/cpu_checkers/tinyram/components"]
+)
+

@@ -1,0 +1,28 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+cc_library(
+    name = "compliance_predicate",
+    visibility = ["//visibility:public"],
+    hdrs = ["compliance_predicate.hpp",
+            "compliance_predicate.tcc",
+            "cp_handler.hpp",
+            "cp_handler.tcc"],
+    copts = ["-I."],
+    deps = [
+        "//libsnark/relations/constraint_satisfaction_problems/r1cs",
+    ]
+)
+
+cc_library(
+    name = "examples",
+    visibility = ["//visibility:public"],
+    hdrs = ["examples/tally_cp.hpp", "examples/tally_cp.tcc"],
+    copts = ["-I."],
+    deps = [
+        "//libsnark/gadgetlib1/gadgets",
+        ":compliance_predicate",
+    ]
+)
+
+
+

@@ -1,0 +1,9 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "bacs_to_r1cs",
+    visibility = ["//visibility:public"],
+    hdrs = ["bacs_to_r1cs.hpp", "bacs_to_r1cs.tcc"],
+    copts = ["-I."]
+)
+
