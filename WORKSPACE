@@ -12,10 +12,9 @@ all_content = """filegroup(name = "all", srcs = glob(["**"]), visibility = ["//v
 
 ################################################################
 http_archive(
-    name = "rules_foreign_cc",
-    strip_prefix="rules_foreign_cc-master",
-    url = "https://github.com/bazelbuild/rules_foreign_cc/archive/master.zip",
-    sha256 = "55b7c4678b4014be103f0e93eb271858a43493ac7a193ec059289fbdc20b9023",
+   name = "rules_foreign_cc",
+   strip_prefix = "rules_foreign_cc-master",
+   url = "https://github.com/bazelbuild/rules_foreign_cc/archive/master.zip",
 )
 
 load("@rules_foreign_cc//:workspace_definitions.bzl", "rules_foreign_cc_dependencies")
