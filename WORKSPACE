@@ -103,22 +103,32 @@ http_archive(
     # build_file = "@//external:libgmp.BUILD"
 )
 
-local_repository(
+http_archive(
     name = "libfqfft",
-    path = "/Users/gar/snark/libfqfft"
+    urls = ["https://github.com/obazl/libfqfft/archive/bzl-1.0.zip"],
+    strip_prefix = "libfqfft-bzl-1.0",
+    sha256 = "9bf3cd1b190825d0c1cf5aa7f91f70c320132d71cb968dadcf7c6476a6aa3511"
 )
 
-local_repository(
+http_archive(
     name = "libff",
-    path = "/Users/gar/snark/libff"
+    urls = ["https://github.com/obazl/libff/archive/bzl-1.1.zip"],
+    strip_prefix = "libff-bzl-1.0",
+    sha256 = "977e9530c876f284b3186e1c4dbf3311a49d0f0eed5cdce7e9a22c2763d619cc"
 )
 
-local_repository(
+http_archive(
     name = "ate_pairing",
-    path = "/Users/gar/snark/ate-pairing"
+    urls = ["https://github.com/obazl/ate-pairing/archive/bzl-1.0.zip"],
+    strip_prefix = "ate-pairing-bzl-1.0",
+    sha256 = "08a6bc65e22e8f05e7f16fe984830653e5411aa4a03a9f2838531b0c453ba7fe"
 )
 
-local_repository(
-    name = "xbyak",
-    path = "/Users/gar/snark/xbyak"
-)
+# http_archive(
+#     name = "xbyak",
+#     urls = ["https://github.com/obazl/xbyak/archive/bzl-1.0.zip"],
+#     strip_prefix = "xbyak-bzl-1.0",
+#     sha256 = "5a24976ed246c0c2fcfd51a8b32c60760d85f339cebd75d074f9d0bbdd1a61e3"
+# )
+
+
