@@ -1,14 +1,6 @@
-try-import user.bazelrc
-
 # enable platform-based toolchain resolution:
 build --incompatible_enable_cc_toolchain_resolution
 
 build --color=yes
-# build --subcommands=pretty_print
-# build --verbose_failures
-# build --sandbox_debug
-# build --toolchain_resolution_debug
-# build --show_timestamps
-# build --keep_going
-# build --jobs 600
-# query --keep_going
+
+try-import user.bazelrc
