@@ -1,0 +1,12 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "examples",
+    visibility = ["//visibility:public"],
+    hdrs = ["bacs_examples.hpp",
+            "bacs_examples.tcc"],
+    deps = [
+        "//libsnark/relations/circuit_satisfaction_problems/bacs"
+    ]
+)
+

@@ -1,0 +1,15 @@
+load("@rules_cc//cc:defs.bzl", "cc_test")
+
+cc_test(
+    name = "tests",
+    visibility = ["//visibility:public"],
+    srcs = ["test_bacs_ppzksnark.cpp"],
+    copts = ["-I."],
+    deps = [
+        "@libff//libff",
+        "//libsnark/common/default_types",
+        "//libsnark/relations/circuit_satisfaction_problems/bacs/examples",
+        "//libsnark/zk_proof_systems/ppzksnark/bacs_ppzksnark/examples"
+    ]
+)
+

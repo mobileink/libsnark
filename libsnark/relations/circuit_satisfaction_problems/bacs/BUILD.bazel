@@ -6,13 +6,4 @@ cc_library(
     hdrs = ["bacs.hpp", "bacs.tcc"]
 )
 
-cc_library(
-    name = "examples",
-    visibility = ["//visibility:public"],
-    hdrs = ["examples/bacs_examples.hpp",
-            "examples/bacs_examples.tcc"],
-    deps = [
-        "//libsnark/relations/circuit_satisfaction_problems/bacs"
-    ]
-)
 

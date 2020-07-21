@@ -6,19 +6,3 @@ cc_library(
     hdrs = ["ram_to_r1cs.hpp", "ram_to_r1cs.tcc"],
     deps = ["//libsnark/reductions/ram_to_r1cs/gadgets"]
 )
-
-cc_binary(
-    name = "examples",
-    visibility = ["//visibility:public"],
-    srcs = [ "examples/demo_arithmetization.cpp" ],
-    copts = ["-I."],
-    deps = [
-        # "//libff/common/default_types",
-        # "//libff/common",
-        "//libsnark/common/default_types",
-        "//libsnark/reductions/ram_to_r1cs",
-        "//libsnark/relations/ram_computations/rams/tinyram",
-        "//libsnark/zk_proof_systems/ppzksnark/ram_ppzksnark",
-        "@boost//:program_options"
-    ]
-)

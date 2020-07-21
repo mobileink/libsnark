@@ -1,0 +1,15 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "examples",
+    visibility = ["//visibility:public"],
+    hdrs = ["tally_cp.hpp", "tally_cp.tcc"],
+    copts = ["-I."],
+    deps = [
+        "//libsnark/gadgetlib1/gadgets",
+        "//libsnark/zk_proof_systems/pcd/r1cs_pcd/compliance_predicate",
+    ]
+)
+
+
+

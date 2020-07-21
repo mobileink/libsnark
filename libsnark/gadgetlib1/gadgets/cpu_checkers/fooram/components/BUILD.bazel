@@ -1,0 +1,7 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "components",
+    hdrs = glob(["*.hpp"]) + glob(["*.tcc"]),
+    visibility = ["//visibility:public"],
+)

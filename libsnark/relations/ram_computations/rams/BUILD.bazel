@@ -1,15 +1,8 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_library")
 
 cc_library(
     name = "rams",
     visibility = ["//visibility:public"],
     hdrs = ["ram_params.hpp"]
-)
-
-cc_library(
-    name = "examples",
-    visibility = ["//visibility:public"],
-    hdrs = ["examples/ram_examples.hpp", "examples/ram_examples.tcc"],
-    deps = [":rams"]
 )
 

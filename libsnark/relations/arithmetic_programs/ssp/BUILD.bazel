@@ -1,21 +1,9 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_library")
 
 cc_library(
     name = "ssp",
     visibility = ["//visibility:public"],
     hdrs = ["ssp.hpp", "ssp.tcc"],
     deps = ["@libfqfft//libfqfft"]
-)
-
-cc_binary(
-    name = "tests",
-    visibility = ["//visibility:public"],
-    srcs = ["tests/test_ssp.cpp"],
-    copts = ["-I."],
-    deps = [
-        "//libsnark/reductions/uscs_to_ssp",
-        "//libsnark/relations/constraint_satisfaction_problems/uscs:examples",
-        "@libff//libff"
-    ]
 )
 

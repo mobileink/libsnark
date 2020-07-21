@@ -1,0 +1,10 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "fooram",
+    hdrs = [
+        "fooram_cpu_checker.hpp",
+        "fooram_cpu_checker.tcc",
+    ],
+    visibility = ["//visibility:public"],
+)

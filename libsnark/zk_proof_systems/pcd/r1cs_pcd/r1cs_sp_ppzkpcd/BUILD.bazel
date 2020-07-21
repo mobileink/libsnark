@@ -1,4 +1,4 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_library")
 
 cc_library(
     name = "r1cs_sp_ppzkpcd",
@@ -17,28 +17,5 @@ cc_library(
         "//libsnark/gadgetlib1/gadgets/hashes:crh_gadget",
         "//libsnark/gadgetlib1/gadgets/pairing",
         "@libff//libff"
-    ]
-)
-
-cc_library(
-    name = "examples",
-    visibility = ["//visibility:public"],
-    hdrs = ["examples/run_r1cs_sp_ppzkpcd.hpp",
-            "examples/run_r1cs_sp_ppzkpcd.tcc"],
-    copts = ["-I."],
-    deps = [
-        "//libsnark/zk_proof_systems/pcd/r1cs_pcd/compliance_predicate:examples",
-        "//libsnark/zk_proof_systems/pcd/r1cs_pcd/r1cs_sp_ppzkpcd"
-    ]
-)
-
-cc_binary(
-    name = "tests",
-    visibility = ["//visibility:public"],
-    srcs = ["tests/test_r1cs_sp_ppzkpcd.cpp"],
-    copts = ["-I."],
-    deps = [
-        "//libsnark/common/default_types",
-        "//libsnark/zk_proof_systems/pcd/r1cs_pcd/r1cs_sp_ppzkpcd:examples"
     ]
 )

@@ -1,0 +1,14 @@
+load("@rules_cc//cc:defs.bzl", "cc_test")
+
+cc_test(
+    name = "tests",
+    srcs = ["test_r1cs_ppzksnark.cpp"],
+    copts = ["-I."],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//libsnark/common/default_types",
+        "//libsnark/relations/constraint_satisfaction_problems/r1cs/examples",
+        "//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark",
+        "//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark/examples",
+    ],
+)

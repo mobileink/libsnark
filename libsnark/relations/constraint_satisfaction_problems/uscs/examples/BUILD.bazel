@@ -1,0 +1,9 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "examples",
+    visibility = ["//visibility:public"],
+    hdrs = ["uscs_examples.hpp",
+            "uscs_examples.tcc"],
+    deps = ["//libsnark/relations/constraint_satisfaction_problems/uscs"]
+)

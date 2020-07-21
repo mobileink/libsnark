@@ -116,7 +116,7 @@ cc_library(
     srcs = [
 
     ],
-    hdrs = glob([".hpp"])
+    hdrs = glob(["*.hpp"])
     + glob(["*.tcc"])
     + [
     ],
@@ -131,7 +131,7 @@ cc_library(
         "//libsnark/relations/ram_computations/memory",
         "//libsnark/relations/ram_computations/rams/fooram",
         "//libsnark/relations/ram_computations/rams/tinyram",
-        "@ate_pairing//:zm", # if curve = bn128
+        "@ate_pairing//ate-pairing", # if curve = bn128  (Note the hyphenated spelling)
         # "//procps//props",  # if curve = bn128
     ]
 )

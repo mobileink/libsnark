@@ -1,22 +1,9 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_library")
 
 cc_library(
     name = "qap",
     visibility = ["//visibility:public"],
     hdrs = ["qap.hpp", "qap.tcc"],
     deps = ["@libfqfft//libfqfft"]
-)
-
-cc_binary(
-    name = "tests",
-    visibility = ["//visibility:public"],
-    srcs = ["tests/test_qap.cpp"],
-    copts = ["-I."],
-    deps = [
-        "@libff//libff",
-        "//libsnark/reductions/r1cs_to_qap",
-        "//libsnark/relations/constraint_satisfaction_problems/r1cs:examples"
-
-    ]
 )
 

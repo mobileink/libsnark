@@ -1,0 +1,12 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "examples",
+    visibility = ["//visibility:public"],
+    hdrs = ["run_r1cs_gg_ppzksnark.hpp",
+            "run_r1cs_gg_ppzksnark.tcc"],
+    copts = ["-I."],
+    deps = ["//libsnark/zk_proof_systems/ppzksnark/r1cs_gg_ppzksnark",
+            "//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark"]
+)
+

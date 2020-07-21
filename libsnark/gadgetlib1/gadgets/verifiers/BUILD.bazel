@@ -1,19 +1,13 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_library")
+load("//bzl:vars.bzl", "CXX_FLAGS")
 
 cc_library(
     name = "verifiers",
+    hdrs = [
+        "r1cs_ppzksnark_verifier_gadget.hpp",
+        "r1cs_ppzksnark_verifier_gadget.tcc",
+    ],
+    copts = CXX_FLAGS,
     visibility = ["//visibility:public"],
-    hdrs = ["r1cs_ppzksnark_verifier_gadget.hpp",
-            "r1cs_ppzksnark_verifier_gadget.tcc"],
-    deps = []
+    deps = [],
 )
-
-cc_binary(
-    name = "tests",
-    visibility = ["//visibility:public"],
-    srcs = ["test_r1cs_ppzksnark_verifier_gadget.cpp"],
-    deps = []
-)
-
-
-

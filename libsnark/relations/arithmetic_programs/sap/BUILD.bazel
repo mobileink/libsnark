@@ -1,4 +1,4 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_library")
 
 cc_library(
     name = "sap",
@@ -6,17 +6,5 @@ cc_library(
     copts = ["-I."],
     hdrs = ["sap.hpp", "sap.tcc"],
     deps = ["@libfqfft//libfqfft"]
-)
-
-cc_binary(
-    name = "tests",
-    visibility = ["//visibility:public"],
-    srcs = ["tests/test_sap.cpp"],
-    copts = ["-I."],
-    deps = [
-        "//libsnark/reductions/r1cs_to_sap",
-        "//libsnark/relations/constraint_satisfaction_problems/r1cs:examples",
-        "@libff//libff"
-    ]
 )
 

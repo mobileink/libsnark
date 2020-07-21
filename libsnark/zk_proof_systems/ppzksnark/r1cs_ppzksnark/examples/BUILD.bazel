@@ -1,0 +1,15 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "examples",
+    hdrs = [
+        "run_r1cs_ppzksnark.hpp",
+        "run_r1cs_ppzksnark.tcc",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark",
+        # "//libsnark/relations/constraint_satisfaction_problems/r1cs:example",
+        # "//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark"
+    ],
+)

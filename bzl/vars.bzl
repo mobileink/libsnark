@@ -1,6 +1,7 @@
-CMAKE_CXX_FLAGS = ["-std=c++11",
-                   "-Wall", "-Wextra", "-Wfatal-errors",
-                   # "-pthread"
+# CMAKE_CXX_FLAGS = ["-std=c++11",
+CXX_FLAGS = ["-std=c++11",
+             "-Wall", "-Wextra", "-Wfatal-errors",
+             "-Wno-unused-variables"
 ]
 
   # if("${MULTICORE}")
