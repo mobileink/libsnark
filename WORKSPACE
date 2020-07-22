@@ -51,14 +51,14 @@ load("@com_github_nelhage_rules_boost//:boost/boost.bzl", "boost_deps")
 boost_deps()
 
 ################################################################
-http_archive(
-    name="libprocps",
-    url="https://gitlab.com/procps-ng/procps/-/archive/v3.3.16/procps-v3.3.16.tar.gz",
-    sha256="7f09945e73beac5b12e163a7ee4cae98bcdd9a505163b6a060756f462907ebbc",
-    strip_prefix = "procps-v3.3.16",
-    build_file_content = all_content
-    # build_file = "@//bzl/external/libprocps.BUILD"
-)
+# http_archive(
+#     name="libprocps",
+#     url="https://gitlab.com/procps-ng/procps/-/archive/v3.3.16/procps-v3.3.16.tar.gz",
+#     sha256="7f09945e73beac5b12e163a7ee4cae98bcdd9a505163b6a060756f462907ebbc",
+#     strip_prefix = "procps-v3.3.16",
+#     build_file_content = all_content
+#     # build_file = "@//bzl/external/libprocps.BUILD"
+# )
 
 ################################################################
 http_archive(
@@ -80,14 +80,14 @@ http_archive(
 # )
 
 ## libsnark-specific extract:
-new_git_repository(
-    name = "supercop",
-    commit = "b04a0ea2c7d7422d74a512ce848e762196f48149",
-    remote = "https://github.com/mbbarbosa/libsnark-supercop",
-    shallow_since = "1433349878 +0100",
-    # build_file = "@//:BUILD.bazel"
-    build_file = "@//bzl/external/supercop:BUILD"
-)
+# new_git_repository(
+#     name = "supercop",
+#     commit = "b04a0ea2c7d7422d74a512ce848e762196f48149",
+#     remote = "https://github.com/mbbarbosa/libsnark-supercop",
+#     shallow_since = "1433349878 +0100",
+#     # build_file = "@//:BUILD.bazel"
+#     build_file = "@//bzl/external/supercop:BUILD"
+# )
 
 
 
