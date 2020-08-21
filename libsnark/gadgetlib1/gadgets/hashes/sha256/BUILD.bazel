@@ -1,4 +1,4 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_library")
 
 cc_library(
     name = "sha256",
@@ -6,28 +6,10 @@ cc_library(
     hdrs = ["sha256_aux.hpp", "sha256_aux.tcc",
             "sha256_components.hpp", "sha256_components.tcc",
             "sha256_gadget.hpp", "sha256_gadget.tcc"],
-    copts = ["-I."],
+    copts = ["-I.", "-Iexternal/libsnark"],
     deps = [
         "//libsnark/common/data_structures",
         "//libsnark/gadgetlib1/gadgets",
         "//libsnark/gadgetlib1/gadgets/hashes",
     ]
 )
-
-cc_binary(
-    name = "tests",
-    visibility = ["//visibility:public"],
-    srcs = ["tests/test_sha256_gadget.cpp"],
-    copts = ["-I."],
-    deps = [":sha256",
-            "@libff//libff"]
-)
-
-py_binary(
-    name = "testpy",
-    main = "generate_sha256_gadget_tests.py",
-    python_version = "PY2",
-    srcs = ["tests/generate_sha256_gadget_tests.py"]
-)
-
-# tests/pypy_sha256.py

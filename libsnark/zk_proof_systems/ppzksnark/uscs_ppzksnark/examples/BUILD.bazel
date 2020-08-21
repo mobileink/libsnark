@@ -7,5 +7,10 @@ cc_library(
         "run_uscs_ppzksnark.hpp",
         "run_uscs_ppzksnark.tcc"
     ],
-    deps = ["//libsnark/zk_proof_systems/ppzksnark/uscs_ppzksnark"]
+    copts = ["-I.", "-Iexternal/libsnark", "-Iexternal/libff"],
+    deps = [
+        "@libff//libff/common:profiling",
+        "@libff//libff/common/default_types",
+        "@libsnark//libsnark/zk_proof_systems/ppzksnark/uscs_ppzksnark"
+    ]
 )

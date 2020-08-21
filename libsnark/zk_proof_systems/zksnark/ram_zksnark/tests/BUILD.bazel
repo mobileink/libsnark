@@ -3,7 +3,7 @@ load("@rules_cc//cc:defs.bzl", "cc_test")
 cc_test(
     name = "tests",
     srcs = ["test_ram_zksnark.cpp"],
-    copts = ["-I."],
+    copts = ["-I.", "-Iexternal/libsnark"],
     visibility = ["//visibility:public"],
     deps = [
         "//libsnark/common/default_types",

@@ -1,8 +1,6 @@
 cc_library(
-    name = "weierstrass",
+    name = "curves",
     visibility = ["//visibility:public"],
-    # srcs = ["",
-    # ],
     hdrs = ["weierstrass_g1_gadget.hpp",
             "weierstrass_g1_gadget.tcc",
             "weierstrass_g2_gadget.hpp",

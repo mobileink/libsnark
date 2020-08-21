@@ -1,4 +1,4 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_library")
 
 cc_library(
     name = "routing",
@@ -15,12 +15,4 @@ cc_library(
             "//libsnark/gadgetlib1"]
 )
 
-cc_binary(
-    name = "profiling",
-    visibility = ["//visibility:public"],
-    srcs = ["profiling/profile_routing_gadgets.cpp"],
-    copts = ["-I."],
-    deps = [":routing",
-            "@libff//libff"]
-)
 

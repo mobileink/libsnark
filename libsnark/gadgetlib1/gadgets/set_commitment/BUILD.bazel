@@ -1,4 +1,4 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_library")
 
 cc_library(
     name = "set_commitment",
@@ -7,6 +7,7 @@ cc_library(
             "set_commitment_gadget.tcc",
             "set_membership_proof_variable.hpp",
             "set_membership_proof_variable.tcc"],
+    copts = ["-I.", "-Iexternal/libsnark"],
     deps = [
         "//libsnark/gadgetlib1",
         "//libsnark/gadgetlib1/gadgets",
@@ -15,18 +16,4 @@ cc_library(
     ]
 )
 
-cc_binary(
-    name = "tests",
-    visibility = ["//visibility:public"],
-    srcs = ["tests/test_set_commitment_gadget.cpp"],
-    copts = ["-I."],
-    deps = [
-        #ifdef CURVE_BN128
-        #include <libff/algebra/curves/bn128/bn128_pp.hpp>
-        #endif
-        "//libsnark/gadgetlib1/gadgets/hashes/sha256",
-        ":set_commitment",
-        "@libff//libff"
-    ]
-)
 

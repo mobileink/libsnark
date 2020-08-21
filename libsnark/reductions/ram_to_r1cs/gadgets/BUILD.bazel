@@ -8,6 +8,7 @@ cc_library(
         "ram_universal_gadget.hpp", "ram_universal_gadget.tcc",
         "trace_lines.hpp", "trace_lines.tcc"
     ],
+    copts = ["-I.", "-Iexternal/libsnark"],
     deps = [
         "//libsnark/gadgetlib1/gadgets/routing",
     ]

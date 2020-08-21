@@ -4,6 +4,7 @@ cc_library(
     name = "ssp",
     visibility = ["//visibility:public"],
     hdrs = ["ssp.hpp", "ssp.tcc"],
+    copts = ["-I.", "-Iexternal/libsnark"],
     deps = ["@libfqfft//libfqfft"]
 )
 

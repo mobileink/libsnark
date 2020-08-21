@@ -9,9 +9,9 @@ cc_library(
             "pb_variable.hpp", "pb_variable.tcc",
             "protoboard.hpp", "protoboard.tcc",
             "constraint_profiling.hpp"],
-    include_prefix = "libsnark/gadgetlib1",
+    # include_prefix = "libsnark/gadgetlib1",
     linkstatic = True,
-    copts = ["-I."],
+    copts = ["-I.", "-Iexternal/libsnark"],
     deps = ["//libsnark/relations",
             "//libsnark/relations/constraint_satisfaction_problems/r1cs",
             "@libff//libff"

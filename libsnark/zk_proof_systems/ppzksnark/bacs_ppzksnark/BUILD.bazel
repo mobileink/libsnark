@@ -1,4 +1,4 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_library")
 
 cc_library(
     name = "bacs_ppzksnark",
@@ -6,23 +6,11 @@ cc_library(
     hdrs = ["bacs_ppzksnark.hpp",
             "bacs_ppzksnark.tcc",
             "bacs_ppzksnark_params.hpp"],
+    copts = ["-I.", "-Iexternal/libsnark"],
     deps = [
-        "//libsnark/relations/circuit_satisfaction_problems/bacs",
-        "//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark",
-        "//libsnark/reductions/bacs_to_r1cs"
-    ]
-)
-
-cc_binary(
-    name = "profiling",
-    visibility = ["//visibility:public"],
-    srcs = ["profiling/profile_bacs_ppzksnark.cpp"],
-    copts = ["-I."],
-    deps = [
-        "//libsnark/common/default_types",
-        "//libsnark/relations/circuit_satisfaction_problems/bacs/examples",
-        "//libsnark/zk_proof_systems/ppzksnark/bacs_ppzksnark/examples",
-        "@libff//libff",
+        "@libsnark//libsnark/relations/circuit_satisfaction_problems/bacs",
+        "@libsnark//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark",
+        "@libsnark//libsnark/reductions/bacs_to_r1cs"
     ]
 )
 

@@ -1,12 +1,12 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_library")
 
 cc_library(
     name = "gadgets",
     visibility = ["//visibility:public"],
     hdrs = glob(["*.hpp"]) + glob(["*.tcc"]),
-    copts = ["-I."],
-    deps = ["//libsnark/gadgetlib1",
-            "//libsnark/gadgetlib1/gadgets/curves:weierstrass"]
+    copts = ["-I.", "-Iexternal/libsnark"],
+    deps = ["@libsnark//libsnark/gadgetlib1",
+            "@libsnark//libsnark/gadgetlib1/gadgets/curves"]
 )
 
 cc_library(
@@ -14,7 +14,7 @@ cc_library(
     visibility = ["//visibility:public"],
     hdrs = ["delegated_ra_memory/memory_load_gadget.hpp",
             "delegated_ra_memory/memory_load_store_gadget.hpp"],
-    copts = ["-I."],
-    deps = ["//libsnark/gadgetlib1/gadgets/merkle_tree"]
+    copts = ["-I.", "-Iexternal/libsnark"],
+    deps = ["@libsnark//libsnark/gadgetlib1/gadgets/merkle_tree"]
 )
 

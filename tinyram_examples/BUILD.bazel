@@ -1,0 +1,12 @@
+load("@rules_python//python:defs.bzl", "py_binary", "py_test")
+
+py_binary(
+    name = "process_assembly",
+    srcs = ["process_assembly.py"],
+    args = ["answer0/answer0.s",
+            "answer0/answer0-processed_assembly.txt",
+            "answer0/answer0-architecture_params.txt"],
+    data = ["answer0/answer0.s"],
+    python_version = "PY3",
+    visibility = ["//visibility:public"]
+)

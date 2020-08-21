@@ -9,6 +9,7 @@ cc_library(
             "fp4_gadgets.hpp", "fp4_gadgets.tcc",
             "fp6_gadgets.hpp", "fp6_gadgets.tcc",
     ],
+    copts = ["-I.", "-Iexternal/libsnark"],
     deps = [
         "//libsnark/gadgetlib1",
         "@libff//libff",

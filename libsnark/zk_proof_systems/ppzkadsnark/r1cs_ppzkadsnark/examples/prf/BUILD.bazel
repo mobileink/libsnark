@@ -1,9 +1,14 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
+load("@bazel_skylib//lib:selects.bzl", "selects")
 
 cc_library(
     name = "prf",
     visibility = ["//visibility:public"],
-    hdrs = ["aes_ctr_prf.hpp", "aes_ctr_prf.tcc"],
+    hdrs = [
+        "aes_ctr_prf.hpp",
+        "aes_ctr_prf.tcc"
+    ],
+    copts = ["-I.", "-Iexternal/libsnark"],
     deps = ["//libsnark/zk_proof_systems/ppzkadsnark/r1cs_ppzkadsnark"]
 )
 

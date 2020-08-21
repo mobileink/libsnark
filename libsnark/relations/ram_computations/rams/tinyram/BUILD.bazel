@@ -5,7 +5,7 @@ cc_library(
     visibility = ["//visibility:public"],
     srcs = ["tinyram_aux.cpp", "tinyram_aux.hpp"],
     hdrs = ["tinyram_params.hpp"],
-    copts = ["-I."],
+    copts = ["-I.", "-Iexternal/libsnark"],
     linkstatic = True,
     deps = [
         "//libsnark/gadgetlib1/gadgets/cpu_checkers/tinyram",

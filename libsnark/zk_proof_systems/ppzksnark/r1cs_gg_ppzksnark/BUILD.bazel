@@ -1,4 +1,4 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_library")
 
 cc_library(
     name = "r1cs_gg_ppzksnark",
@@ -6,7 +6,7 @@ cc_library(
     hdrs = ["r1cs_gg_ppzksnark.hpp",
             "r1cs_gg_ppzksnark.tcc",
             "r1cs_gg_ppzksnark_params.hpp"],
-    # deps = [""]
+    copts = ["-I.", "-Iexternal/libsnark"],
 )
 
 

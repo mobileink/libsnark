@@ -2,14 +2,19 @@ load("@rules_cc//cc:defs.bzl", "cc_test")
 
 cc_test(
     name = "tests",
+    timeout = "short",
     visibility = ["//visibility:public"],
     srcs = ["test_uscs_ppzksnark.cpp"],
-    copts = ["-I."],
+    copts = [
+        "-I.",
+        "-Iexternal/libff"
+        # "-Iexternal/libsnark",
+    ],
     deps = [
-        "@libff//libff",
-        "//libsnark/common/default_types",
-        "//libsnark/relations/constraint_satisfaction_problems/uscs/examples",
-        "//libsnark/zk_proof_systems/ppzksnark/uscs_ppzksnark/examples"
+        "@libsnark//libsnark/common/default_types:uscs_ppzksnark",
+        "@libsnark//libsnark/relations/constraint_satisfaction_problems/uscs/examples",
+        "@libsnark//libsnark/zk_proof_systems/ppzksnark/uscs_ppzksnark/examples",
+        "@libff//libff"
     ]
 )
 

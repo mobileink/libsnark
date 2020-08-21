@@ -1,4 +1,4 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_library")
 
 cc_library(
     name = "tbcs_ppzksnark",
@@ -7,46 +7,12 @@ cc_library(
         "tbcs_ppzksnark.hpp", "tbcs_ppzksnark.tcc",
         "tbcs_ppzksnark_params.hpp"
     ],
-    copts = ["-I."],
+    copts = ["-I.", "-Iexternal/libsnark"],
     deps = [
-        "//libsnark/relations/circuit_satisfaction_problems/tbcs",
-        "//libsnark/zk_proof_systems/ppzksnark/uscs_ppzksnark",
-        "//libsnark/reductions/tbcs_to_uscs",
+        "@libsnark//libsnark/relations/circuit_satisfaction_problems/tbcs",
+        "@libsnark//libsnark/zk_proof_systems/ppzksnark/uscs_ppzksnark",
+        "@libsnark//libsnark/reductions/tbcs_to_uscs",
     ]
 )
 
-cc_library(
-    name = "examples",
-    visibility = ["//visibility:public"],
-    hdrs = [
-        "examples/run_tbcs_ppzksnark.hpp",
-        "examples/run_tbcs_ppzksnark.tcc"
-    ],
-    deps = [":tbcs_ppzksnark"]
-)
-
-cc_binary(
-    name = "profiling",
-    visibility = ["//visibility:public"],
-    srcs = ["profiling/profile_tbcs_ppzksnark.cpp"],
-    copts = ["-I."],
-    deps = [
-        "//libsnark/common/default_types",
-        "//libsnark/relations/circuit_satisfaction_problems/tbcs:examples",
-        ":examples",
-        "@libff//libff"
-    ]
-)
-
-cc_binary(
-    name = "tests",
-    visibility = ["//visibility:public"],
-    srcs = ["tests/test_tbcs_ppzksnark.cpp"],
-    copts = ["-I."],
-    deps = [
-        "//libsnark/common/default_types",
-        "//libsnark/relations/circuit_satisfaction_problems/tbcs:examples",
-        "//libsnark/zk_proof_systems/ppzksnark/tbcs_ppzksnark:examples"
-    ]
-)
 

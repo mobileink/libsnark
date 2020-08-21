@@ -7,12 +7,12 @@ cc_library(
         "uscs_ppzksnark.hpp", "uscs_ppzksnark.tcc",
         "uscs_ppzksnark_params.hpp"
     ],
-    copts = ["-I."],
+    copts = ["-I.", "-Iexternal/libsnark"],
     deps = [
-        "//libsnark/common/data_structures",
-        "//libsnark/knowledge_commitment",
-        "//libsnark/relations/constraint_satisfaction_problems/uscs",
-        "//libsnark/reductions/uscs_to_ssp",
-        "//libsnark/relations/arithmetic_programs/ssp"
+        "@libsnark//libsnark/common/data_structures",
+        "@libsnark//libsnark/knowledge_commitment",
+        "@libsnark//libsnark/relations/constraint_satisfaction_problems/uscs",
+        "@libsnark//libsnark/reductions/uscs_to_ssp",
+        "@libsnark//libsnark/relations/arithmetic_programs/ssp"
     ]
 )

@@ -1,5 +1,5 @@
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("//bzl:vars.bzl", "CXX_FLAGS")
+load("//bzl/config:vars.bzl", "CXXFLAGS")
 
 cc_library(
     name = "verifiers",
@@ -7,7 +7,7 @@ cc_library(
         "r1cs_ppzksnark_verifier_gadget.hpp",
         "r1cs_ppzksnark_verifier_gadget.tcc",
     ],
-    copts = CXX_FLAGS,
+    copts = CXXFLAGS + ["-I.", "-Iexternal/libsnark"],
     visibility = ["//visibility:public"],
     deps = [],
 )

@@ -4,6 +4,7 @@ cc_library(
     name = "components",
     visibility = ["//visibility:public"],
     hdrs = glob(["*.hpp", "*.tcc"]),
+    copts = ["-I.", "-Iexternal/libsnark"],
     deps = ["//libsnark/gadgetlib1/gadgets"]
 )
 

@@ -3,7 +3,7 @@ load("@rules_cc//cc:defs.bzl", "cc_library")
 cc_library(
     name = "sap",
     visibility = ["//visibility:public"],
-    copts = ["-I."],
+    copts = ["-I.", "-Iexternal/libsnark"],
     hdrs = ["sap.hpp", "sap.tcc"],
     deps = ["@libfqfft//libfqfft"]
 )

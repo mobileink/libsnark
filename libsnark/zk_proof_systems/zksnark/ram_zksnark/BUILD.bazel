@@ -9,6 +9,7 @@ cc_library(
         "ram_zksnark.tcc",
         "ram_zksnark_params.hpp",
     ],
+    copts = ["-I.", "-Iexternal/libsnark"],
     visibility = ["//visibility:public"],
     deps = [
         "//libsnark/gadgetlib1/gadgets:delegated_ra_memory",

@@ -4,7 +4,7 @@ cc_library(
     name = "relations",
     visibility = ["//visibility:public"],
     hdrs = ["variable.hpp", "variable.tcc"],
-    copts = ["-I."],
+    copts = ["-I.", "-Iexternal/libsnark"],
     deps = ["@libff//libff"]
 )
 

@@ -5,7 +5,10 @@ cc_library(
     visibility = ["//visibility:public"],
     srcs = ["fooram_aux.cpp", "fooram_aux.hpp"],
     hdrs = ["fooram_params.hpp"],
-    copts = ["-I."],
+    copts = [
+        "-I.",
+        "-Iexternal/libsnark"
+    ],
     linkstatic = True,
     deps = [
         "//libsnark/relations/ram_computations/memory",

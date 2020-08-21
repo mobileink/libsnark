@@ -6,9 +6,12 @@ cc_library(
         "run_bacs_ppzksnark.hpp",
         "run_bacs_ppzksnark.tcc",
     ],
+    copts = ["-I.", "-Iexternal/libsnark", "-Iexternal/libff"],
     visibility = ["//visibility:public"],
     deps = [
-        "//libsnark/zk_proof_systems/ppzksnark/bacs_ppzksnark",
-        "//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark",
+        "@libff//libff/common:profiling",
+        "@libff//libff/common/default_types",
+        "@libsnark//libsnark/zk_proof_systems/ppzksnark/bacs_ppzksnark",
+        "@libsnark//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark",
     ],
 )

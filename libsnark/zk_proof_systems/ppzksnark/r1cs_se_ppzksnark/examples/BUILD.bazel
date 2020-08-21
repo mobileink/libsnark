@@ -5,6 +5,10 @@ cc_library(
     visibility = ["//visibility:public"],
     hdrs = ["run_r1cs_se_ppzksnark.hpp",
             "run_r1cs_se_ppzksnark.tcc"],
-    deps = ["//libsnark/zk_proof_systems/ppzksnark/r1cs_se_ppzksnark",
-            "//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark"]
+    copts = ["-I.", "-Iexternal/libsnark", "-Iexternal/libff"],
+    deps = [
+        "@libff//libff/common:profiling",
+        "@libff//libff/common/default_types",
+        "@libsnark//libsnark/zk_proof_systems/ppzksnark/r1cs_se_ppzksnark",
+        "@libsnark//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark"]
 )

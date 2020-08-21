@@ -5,9 +5,11 @@ cc_library(
     visibility = ["//visibility:public"],
     hdrs = ["run_r1cs_sp_ppzkpcd.hpp",
             "run_r1cs_sp_ppzkpcd.tcc"],
-    copts = ["-I."],
+    copts = ["-I.", "-Iexternal/libsnark"],
     deps = [
-        "//libsnark/zk_proof_systems/pcd/r1cs_pcd/compliance_predicate/examples",
-        "//libsnark/zk_proof_systems/pcd/r1cs_pcd/r1cs_sp_ppzkpcd"
+        "@libff//libff/common:profiling",
+        "@libff//libff/common/default_types",
+        "@libsnark//libsnark/zk_proof_systems/pcd/r1cs_pcd/compliance_predicate/examples",
+        "@libsnark//libsnark/zk_proof_systems/pcd/r1cs_pcd/r1cs_sp_ppzkpcd"
     ]
 )

@@ -5,7 +5,7 @@ cc_binary(
     srcs = [
         "tutorial.cpp",
     ],
-    copts = ["-I."],
+    copts = ["-I.", "-Iexternal/libsnark", "-Iexternal/libff"],
     linkstatic = True,
     visibility = ["//visibility:public"],
     deps = [
@@ -24,14 +24,15 @@ cc_library(
         "simple_example.cpp",
     ],
     hdrs = ["simple_example.hpp"],
-    copts = ["-I."],
+    copts = ["-I.", "-Iexternal/libsnark", "-Iexternal/libff"],
     linkstatic = True,
     visibility = ["//visibility:public"],
     deps = [
-        "//libsnark/gadgetlib2",
+        "@libsnark//libsnark/gadgetlib2",
+        "@libsnark//libsnark/relations/constraint_satisfaction_problems/r1cs/examples",
+        "@libsnark//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark/examples",
+        # "@libfqfft//libfqfft",
         # "//libff/common/default_types",
-        "//libsnark/relations/constraint_satisfaction_problems/r1cs/examples",
-        "//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark/examples",
         "@gtest//:gtest_main"
     ],
 )

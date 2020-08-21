@@ -4,11 +4,12 @@ cc_binary(
     name = "profiling",
     visibility = ["//visibility:public"],
     srcs = ["profile_r1cs_gg_ppzksnark.cpp"],
-    copts = ["-I."],
+    copts = ["-I.", "-Iexternal/libsnark", "-Iexternal/libff"],
     deps = [
-        "//libsnark/common/default_types",
-        "//libsnark/relations/constraint_satisfaction_problems/r1cs/examples",
-        "//libsnark/zk_proof_systems/ppzksnark/r1cs_gg_ppzksnark/examples",
-        "@libff//libff",
+        "@libsnark//libsnark/common/default_types:r1cs_gg_ppzksnark",
+        "@libsnark//libsnark/relations/constraint_satisfaction_problems/r1cs/examples",
+        "@libsnark//libsnark/zk_proof_systems/ppzksnark/r1cs_gg_ppzksnark/examples",
+        "@libff//libff/common:profiling",
+        "@libff//libff/common/default_types",
     ]
 )

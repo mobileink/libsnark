@@ -5,16 +5,7 @@ cc_library(
     visibility = ["//visibility:public"],
     srcs = glob(["*.cpp", "*.hpp"]),
     hdrs = glob([".hpp"]),
-    copts = ["-I."],
+    copts = ["-I.", "-Iexternal/libsnark"],
     deps = ["//libsnark/common/data_structures",
-            "@libff//libff"]
-)
-
-cc_binary(
-    name = "profiling",
-    visibility = ["//visibility:public"],
-    srcs = ["profiling/profile_routing_algorithms.cpp"],
-    copts = ["-I."],
-    deps = [":routing_algorithms",
             "@libff//libff"]
 )

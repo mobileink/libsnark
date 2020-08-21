@@ -4,9 +4,11 @@ cc_library(
     name = "r1cs_to_qap",
     visibility = ["//visibility:public"],
     hdrs = ["r1cs_to_qap.hpp", "r1cs_to_qap.tcc"],
+    copts = ["-I.", "-Iexternal/libsnark"],
     deps = [
-        "//libsnark/relations/arithmetic_programs/qap",
-        "//libsnark/relations/constraint_satisfaction_problems/r1cs"
+        "@libsnark//libsnark/relations/arithmetic_programs/qap",
+        "@libsnark//libsnark/relations/constraint_satisfaction_problems/r1cs",
+        "@libfqfft//libfqfft",
     ]
 )
 

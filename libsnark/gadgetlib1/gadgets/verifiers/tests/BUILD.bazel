@@ -4,7 +4,7 @@ cc_binary(
     name = "tests",
     srcs = ["test_r1cs_ppzksnark_verifier_gadget.cpp"],
     visibility = ["//visibility:public"],
-    copts = ["-I."],
+    copts = ["-I.", "-Iexternal/libsnark"],
     deps = [
         "@libff//libff/algebra/curves/mnt/mnt4",
         "@libff//libff/algebra/curves/mnt/mnt6",

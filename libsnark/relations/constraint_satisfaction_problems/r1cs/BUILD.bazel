@@ -1,8 +1,9 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_library")
 
 cc_library(
     name = "r1cs",
     visibility = ["//visibility:public"],
     hdrs = ["r1cs.hpp", "r1cs.tcc"],
+    copts = ["-I.", "-Iexternal/libsnark"],
     deps = ["//libsnark/relations"]
 )

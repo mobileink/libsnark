@@ -6,10 +6,11 @@ cc_library(
         "run_r1cs_ppzksnark.hpp",
         "run_r1cs_ppzksnark.tcc",
     ],
+    copts = ["-I.", "-Iexternal/libsnark", "-Iexternal/libff"],
     visibility = ["//visibility:public"],
     deps = [
-        "//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark",
-        # "//libsnark/relations/constraint_satisfaction_problems/r1cs:example",
-        # "//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark"
+        "@libsnark//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark",
+        "@libff//libff/common:profiling",
+        "@libff//libff/common/default_types",
     ],
 )

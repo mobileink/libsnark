@@ -1,15 +1,16 @@
 load("@rules_cc//cc:defs.bzl", "cc_binary")
+load("@bazel_skylib//lib:selects.bzl", "selects")
 
 cc_binary(
     name = "examples",
-    srcs = ["demo_r1cs_ppzkadsnark.cpp",
-            "run_r1cs_ppzkadsnark.hpp",
-            "run_r1cs_ppzkadsnark.tcc",
-    ],
-    copts = select({
-        "//bzl/host:macos": ["'ERROR (macos): this target only valid with flag --with-supercop'"],
-        "//conditions:default": ["-I."],
+    srcs = selects.with_or({
+        ("//bzl/config:without_supercop", "//bzl/host:macos"): ["null_main.cpp"],
+        "//conditions:default": ["demo_r1cs_ppzkadsnark.cpp",
+                                 "run_r1cs_ppzkadsnark.hpp",
+                                 "run_r1cs_ppzkadsnark.tcc",
+        ],
     }),
+    copts = ["-I.", "-Iexternal/libsnark"],
     visibility = ["//visibility:public"],
     deps = [
         "//libsnark/common/default_types",

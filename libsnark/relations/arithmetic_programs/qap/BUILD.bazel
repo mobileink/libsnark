@@ -4,6 +4,9 @@ cc_library(
     name = "qap",
     visibility = ["//visibility:public"],
     hdrs = ["qap.hpp", "qap.tcc"],
-    deps = ["@libfqfft//libfqfft"]
+    copts = ["-I.", "-Iexternal/libsnark",
+             "-Iexternal"],
+    deps = [
+        "@libfqfft//libfqfft/evaluation_domain"]
 )
 

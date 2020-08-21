@@ -1,12 +1,18 @@
+workspace(name="libsnark")
+
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository", "new_git_repository")
 
-# required tools (from readme):
-#  $ sudo apt-get install build-essential cmake git libgmp3-dev libprocps4-dev python-markdown libboost-all-dev libssl-dev
-# libs: libgmp3-dev, libprocps4-dev, libboost, libssl
-# uses ccache if found
-
-# load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository", "new_git_repository")
+http_archive(
+    name = "bazel_skylib",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/1.0.2/bazel-skylib-1.0.2.tar.gz",
+        "https://github.com/bazelbuild/bazel-skylib/releases/download/1.0.2/bazel-skylib-1.0.2.tar.gz",
+    ],
+    sha256 = "97e70364e9249702246c0e9444bccdc4b847bed1eb03c5a3ece4f83dfe6abc44",
+)
+load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
+bazel_skylib_workspace()
 
 all_content = """filegroup(name = "all", srcs = glob(["**"]), visibility = ["//visibility:public"])"""
 
@@ -27,16 +33,6 @@ http_archive(
 
 load("@rules_foreign_cc//:workspace_definitions.bzl", "rules_foreign_cc_dependencies")
 rules_foreign_cc_dependencies()
-
-################################################################
-## libssl, libcrypto
-http_archive(
-    name="openssl",
-    url="https://www.openssl.org/source/openssl-1.1.1g.tar.gz",
-    sha256="ddb04774f1e32f0c49751e21b67216ac87852ceb056b75209af2443400636d46",
-    strip_prefix="openssl-1.1.1g",
-    build_file_content = all_content
-)
 
 ################################################################
 ## FIXME: this fetches boost 1.71.0, libsnark uses 1.40
@@ -61,14 +57,6 @@ boost_deps()
 # )
 
 ################################################################
-http_archive(
-    name="gtest",
-    url="https://github.com/google/googletest/archive/release-1.10.0.tar.gz",
-    sha256="9dc9157a9a1551ec7a7e43daea9a694a0bb5fb8bec81235d8a1e6ef64c716dcb",
-    strip_prefix = "googletest-release-1.10.0",
-)
-
-################################################################
 # https://bench.cr.yp.to/supercop.html
 # http_archive(
 #     name="supercop",
@@ -80,48 +68,71 @@ http_archive(
 # )
 
 ## libsnark-specific extract:
-# new_git_repository(
-#     name = "supercop",
-#     commit = "b04a0ea2c7d7422d74a512ce848e762196f48149",
-#     remote = "https://github.com/mbbarbosa/libsnark-supercop",
-#     shallow_since = "1433349878 +0100",
-#     # build_file = "@//:BUILD.bazel"
-#     build_file = "@//bzl/external/supercop:BUILD"
-# )
-
-
+new_git_repository(
+    name = "supercop",
+    commit = "b04a0ea2c7d7422d74a512ce848e762196f48149",
+    remote = "https://github.com/mbbarbosa/libsnark-supercop",
+    shallow_since = "1433349878 +0100",
+    workspace_file = "//bzl/external/supercop:WORKSPACE",
+    build_file = "//bzl/external/supercop:BUILD"
+)
 
 ################################################################
-# the following deps are actually dependencies of libff, but
-# until Bazel supports transitive externals we have to define them here.
+http_archive(
+    name = "libfqfft",
+    urls = ["https://github.com/obazl/libfqfft/archive/bzl-1.0.zip"],
+    # strip_prefix = "libfqfft-bzl-1.0",
+    # sha256 = "000c51260df657dbdd028e80bfc453e28b99a3dfadfacf250f0d5c912230d24d"
+)
+
+## libfqfft dep: gtest
+http_archive(
+    name="gtest",
+    url="https://github.com/google/googletest/archive/release-1.10.0.tar.gz",
+    sha256="9dc9157a9a1551ec7a7e43daea9a694a0bb5fb8bec81235d8a1e6ef64c716dcb",
+    strip_prefix = "googletest-release-1.10.0",
+)
+
+################################
+http_archive(
+    name = "libff",
+    urls = ["https://github.com/obazl/libff/archive/bzl-1.1.tar.gz"],
+    strip_prefix = "libff-bzl-1.1",
+    sha256 = "d280e666aa08cc2a458c034ece16c87861240e3c5b3cc727e902bd9ee0b19831"
+)
+
+## libff deps: openmp, openssl, procps
+## openmp: build rule //bzl/external/openmp, alias for @libff//bzl/external/openmp
+http_archive(
+    name="openmp",
+    url="https://github.com/llvm/llvm-project/releases/download/llvmorg-10.0.0/openmp-10.0.0.src.tar.xz",
+    sha256="3b9ff29a45d0509a1e9667a0feb43538ef402ea8cfc7df3758a01f20df08adfa",
+    strip_prefix="openmp-10.0.0.src",
+    build_file_content = all_content
+)
+
+http_archive(
+    name="openssl",
+    url="https://www.openssl.org/source/openssl-1.1.1g.tar.gz",
+    sha256="ddb04774f1e32f0c49751e21b67216ac87852ceb056b75209af2443400636d46",
+    strip_prefix="openssl-1.1.1g",
+    build_file_content = all_content
+)
+
+http_archive(
+    name = "ate_pairing",
+    urls = ["https://github.com/obazl/ate-pairing/archive/bzl-1.0.tar.gz"],
+    strip_prefix = "ate-pairing-bzl-1.0",
+    sha256 = "f41ccbeaf38aa26d921953ae4ea2125cffe17051e9ccd3703bd0b7c7d3b05f29"
+)
+
+# libgmp is a dep of ate-pairing
 http_archive(
     name="libgmp",
     url="https://gmplib.org/download/gmp/gmp-6.2.0.tar.xz",
     sha256="258e6cd51b3fbdfc185c716d55f82c08aff57df0c6fbd143cf6ed561267a1526",
     strip_prefix = "gmp-6.2.0",
     build_file_content = all_content
-    # build_file = "@//external:libgmp.BUILD"
-)
-
-http_archive(
-    name = "libfqfft",
-    urls = ["https://github.com/obazl/libfqfft/archive/bzl-1.0.zip"],
-    strip_prefix = "libfqfft-bzl-1.0",
-    sha256 = "000c51260df657dbdd028e80bfc453e28b99a3dfadfacf250f0d5c912230d24d"
-)
-
-http_archive(
-    name = "libff",
-    urls = ["https://github.com/obazl/libff/archive/bzl-1.1.zip"],
-    strip_prefix = "libff-bzl-1.1",
-    sha256 = "cc1e45394dd7dfb5b8df0372eb1b2cacb3ee6a2a673b176943cc1df7d63b9672"
-)
-
-http_archive(
-    name = "ate_pairing",
-    urls = ["https://github.com/obazl/ate-pairing/archive/bzl-1.0.zip"],
-    strip_prefix = "ate-pairing-bzl-1.0",
-    sha256 = "c0b067e986449f281453c62d1b02f875ebbb4d375b7cf71d0031e4acc9ccb5a9"
 )
 
 http_archive(

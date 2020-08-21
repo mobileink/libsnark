@@ -8,17 +8,20 @@ cc_library(
         "r1cs_mp_ppzkpcd.hpp", "r1cs_mp_ppzkpcd.tcc",
         "r1cs_mp_ppzkpcd_params.hpp"
     ],
-    copts = ["-I."],
+    copts = ["-I.", "-Iexternal/libsnark"],
     deps = [
-        "//libsnark/common/data_structures",
-        "//libsnark/gadgetlib1",
-        "//libsnark/gadgetlib1/gadgets",
-        "//libsnark/gadgetlib1/gadgets/hashes:crh_gadget",
-        "//libsnark/gadgetlib1/gadgets/set_commitment",
-        "//libsnark/gadgetlib1/gadgets/verifiers",
-        "//libsnark/zk_proof_systems/pcd/r1cs_pcd",
-        "//libsnark/zk_proof_systems/pcd/r1cs_pcd/compliance_predicate",
-        "//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark"
+        "@libff//libff/common:profiling",
+        "@libff//libff/common/default_types",
+        "@libsnark//libsnark/common",
+        "@libsnark//libsnark/common/data_structures",
+        "@libsnark//libsnark/gadgetlib1",
+        "@libsnark//libsnark/gadgetlib1/gadgets",
+        "@libsnark//libsnark/gadgetlib1/gadgets/hashes:crh_gadget",
+        "@libsnark//libsnark/gadgetlib1/gadgets/set_commitment",
+        "@libsnark//libsnark/gadgetlib1/gadgets/verifiers",
+        "@libsnark//libsnark/zk_proof_systems/pcd/r1cs_pcd",
+        "@libsnark//libsnark/zk_proof_systems/pcd/r1cs_pcd/compliance_predicate",
+        "@libsnark//libsnark/zk_proof_systems/ppzksnark/r1cs_ppzksnark"
     ]
 )
 
